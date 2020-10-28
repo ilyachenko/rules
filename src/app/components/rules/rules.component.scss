@@ -1,0 +1,16 @@
+@import "../../colors";
+
+:host {
+  display: block;
+  width: 100%;
+  background: $white;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px #ced2d7;
+  padding-bottom: 20px;
+
+  .header {
+    color: $dark-grey;
+    padding: 25px;
+    border-bottom: 1px solid $background;
+  }
+}

@@ -1,0 +1,41 @@
+<div class="container">
+  <form [formGroup]="dynamicForm">
+    <div class="inner" [formGroup]="dynamicForm">
+      <div class="title" [innerHTML]="title"></div>
+      <p class="description" [innerHTML]="description"></p>
+
+      <div *ngFor="let rule of rules.controls; let i = index">
+        <div class="wrapper" [formGroup]="rule">
+          <div class="item page">
+            <select class="form-control">
+              <option value="">All Pages</option>
+              <option *ngFor="let page of pages" [ngValue]="page">{{page}}</option>
+            </select>
+          </div>
+          <div class="item expression">
+            <select class="form-control">
+              <option>Contains</option>
+              <option>Exact match</option>
+            </select>
+          </div>
+          <div class="item url">
+            <input type="text" formControlName="url" class="fancy-input">
+            <div class="validation-error" *ngIf="rule.get('url').hasError('required') && rule.get('url').touched">
+              Url is missing
+            </div>
+          </div>
+          <div class="item close">
+            <div class="circle-btn" (click)="removeRule(i)">
+              <span>+</span>
+            </div>
+          </div>
+        </div>
+        <div class="separator" *ngIf="rules.controls.length > 1 && rules.controls.length !== i + 1">OR</div>
+      </div>
+
+      <div class="new-rule">
+        <button class="fancy-btn" (click)="addNewRule()">+ NEW RULE</button>
+      </div>
+    </div>
+  </form>
+</div>
